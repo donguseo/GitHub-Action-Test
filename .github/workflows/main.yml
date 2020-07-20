@@ -28,7 +28,7 @@ jobs:
       id: get-commit-messages
       with:
         script: |
-          return context.event.commits.map((v)=> v.message).join('\n');
+          return ${{ toJson(github) }}.event.commits.map((v)=> v.message).join('\n');
         result-encoding: string
         
     - name: Get result
