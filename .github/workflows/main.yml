@@ -28,8 +28,17 @@ jobs:
       id: get-commit-messages
       with:
         script: |
-          var commits = ${{ toJson(github.event.commits) }};
-          return commits.map((v)=> "- " + v.message).join('\n\n');
+          var gitContext = ${{ toJson(github) }};
+          return gitContext.event.commits.map((v)=> {
+            var msg = v.message;
+            const lines = msg.split('\n');
+            var text = "";
+            for(var i = 1; i < lines.length; i++){
+              text += lines[i];
+            }
+
+            return "- title : " + lines[0] + "\n- message\n" + text + "========================================";
+          }).join('\n');
         result-encoding: string
         
     - name: Get result
