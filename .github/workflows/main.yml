@@ -37,7 +37,7 @@ jobs:
               text += lines[i];
             }
 
-            return "- title : " + lines[0] + "\n- message\n" + text + "========================================";
+            return "- title : " + lines[0] + "\n- message\n" + text + "\n========================================\n\n";
           }).join('\n');
         result-encoding: string
         
